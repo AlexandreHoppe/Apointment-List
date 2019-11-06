@@ -1,0 +1,31 @@
+<apex:page standardController="Opportunity" extensions="ClassAppointmentList" showHeader="false" sidebar="false">
+    <apex:form >   
+        <div style="background-color:#009EDB;color:#009EDB;padding:50px;">
+        <apex:pageBlock html-style="font-size: 14px; color:#FFFFFF;" title="House information" id="contacts_list">
+            <apex:pageBlockSection >                            
+                     <apex:commandButton value="Search" action="{!rosterSearch}" Style="float: left;"><apex:commandButton value="Refresh" action="{!refreshTable}" rerender="tableInfo"/>   
+                    <apex:inputText value="{!searchKey}"/> <span title="Please Enter Street Address"><img style="vertical-align: middle;" src="http://png-3.findicons.com/files/icons/1156/fugue/16/question_frame.png" /></span>
+                </apex:commandButton>
+            </apex:pageBlockSection>
+            <apex:pageBlockTable value="{!propertyList}" var="User" id="tableInfo" Style="color:#FFFFFF;">
+                <apex:column >
+                    <apex:facet name="header">Client</apex:facet>
+                    <apex:outputText value="{!User.Your_Client_NAME__c}"/>
+                </apex:column>  
+                <apex:column >
+                    <apex:facet name="header">Lender</apex:facet>
+                    <apex:outputText value="{!User.Lender_CONTACT_NAME__c}"/>
+                </apex:column>               
+                <apex:column >
+                    <apex:facet name="header">Owner</apex:facet>
+                    <apex:outputText value="{!User.Agent__c}"/>
+                </apex:column>               
+                <apex:column >
+                    <apex:facet name="header">Address</apex:facet>
+                    <apex:outputText value="{!User.Listing_Address_Street__c}, {!User.Listing_Address_City__c}, {!User.Listing_Address_Zip__c} {!User.Listing_Property_State__c}"/>
+                </apex:column>               
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

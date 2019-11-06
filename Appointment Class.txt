@@ -1,0 +1,33 @@
+public class ClassAppointmentList {
+	public List<Opportunity> propertyList {get;set;}
+    public List<Opportunity> searchValue {get;set;}
+    public String searchKey {get;set;}
+    User userBranchInfo = [SELECT Branch__c FROM User WHERE LastName = :UserInfo.getLastName() ];
+    String userBranch = userBranchInfo.Branch__c;
+
+    
+    public ClassAppointmentList(ApexPages.StandardController Controller) {
+
+        propertyList =  [SELECT Id, Listing_Address_Street__C, Listing_Address_City__C, Listing_Address_Zip__C, Listing_Property_State__C, Agent__c, Your_Client_NAME__c, Lender_CONTACT_NAME__c, Branch__c  
+              FROM Opportunity 
+              WHERE Branch__c LIKE :userBranch
+              ];
+        
+    }
+    
+    public void rosterSearch(){
+                
+        propertyList =  [SELECT Id, Listing_Address_Street__C, Listing_Address_City__C, Listing_Address_Zip__C, Listing_Property_State__C, Agent__c, Your_Client_NAME__c, Lender_CONTACT_NAME__c, Branch__c 
+              FROM Opportunity
+              WHERE (Listing_Address_Street__c like :searchKey)
+              
+              ];
+    }
+    
+    public void refreshTable(){
+        propertyList =  [SELECT Id, Listing_Address_Street__C, Listing_Address_City__C, Listing_Address_Zip__C, Listing_Property_State__C, Agent__c, Your_Client_NAME__c, Lender_CONTACT_NAME__c, Branch__c  
+              FROM Opportunity 
+              WHERE Branch__c LIKE :userBranch
+              ];
+    }
+}
